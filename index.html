@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ConectaCampus</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">ConectaCampus</div>
+
+<div class="header-buttons">
+
+<button class="btn-login">Entrar</button>
+
+<button class="btn-register">Cadastro</button>
+
+</div>
+
+</header>
+
+
+<!-- FILTROS -->
+
+<div class="filters">
+
+<div class="tags">
+
+<button class="tag-filter active" data-tag="all">Todos</button>
+<button class="tag-filter" data-tag="TRANSPORTE">Transporte</button>
+<button class="tag-filter" data-tag="MORADIA">Moradia</button>
+<button class="tag-filter" data-tag="ESTÁGIO">Estágio</button>
+
+</div>
+
+
+<div class="price-filter">
+
+<label>Preço máximo</label>
+
+<input type="range" id="priceSlider" min="0" max="3000" value="3000">
+
+<input type="number" id="priceInput" value="3000">
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+<div class="cards" id="cardsContainer"></div>
+
+<div id="noResults" class="no-results">
+Nenhum anúncio listado no site atende os requisitos.
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
