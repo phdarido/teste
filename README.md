@@ -18,15 +18,9 @@ A plataforma reúne informações sobre moradia, transporte, empregos, benefíci
 | Benefícios | Informações sobre PAP e auxílios da assistência estudantil |
 | Campus | Setores, contatos, mapa e infraestrutura do IFSP Jacareí |
 
-### Gamificação ESG
+### Selos ESG
 
-Selos que conferem **apenas maior visibilidade** nos resultados:
-
-- **Habitação Consciente** — imóveis com práticas sustentáveis
-- **Eco-Friendly** — transportes e empresas sustentáveis
-- **Certificado de Competência ESG** — empresas com boas práticas ESG
-
-> Os selos **não** conferem benefício financeiro. Apenas destaque visual.
+Anúncios podem ter um selo ESG opcional que confere **apenas destaque visual** nos resultados (sem benefício financeiro): Habitação Consciente, Eco-Friendly ou Certificado de Competência ESG.
 
 ## Stack Tecnológica
 
@@ -92,8 +86,7 @@ Copie `.env.example` para `.env` e ajuste conforme necessário.
 │   ├── routes/
 │   │   ├── anuncios.js      # GET/POST anúncios (moradia, transporte, emprego)
 │   │   ├── campus.js        # GET setores do campus
-│   │   ├── beneficios.js    # GET benefícios sociais (dados estáticos)
-│   │   └── selos.js         # GET selos ESG
+│   │   └── beneficios.js    # GET benefícios sociais (dados estáticos)
 │   ├── seeds/
 │   │   └── seed.js          # Dados iniciais de exemplo
 │   ├── package.json

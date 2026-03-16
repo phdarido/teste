@@ -40,28 +40,9 @@ function criarTabelas() {
       tipo TEXT NOT NULL CHECK(tipo IN ('MORADIA', 'TRANSPORTE', 'EMPREGO')),
       imagem_url TEXT,
       link_externo TEXT,
+      selo_esg TEXT DEFAULT NULL CHECK(selo_esg IN (NULL, 'Habitação Consciente', 'Eco-Friendly', 'Certificado de Competência ESG')),
       status TEXT NOT NULL DEFAULT 'pendente' CHECK(status IN ('pendente', 'aprovado', 'rejeitado')),
       criado_em DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
-
-    /*
-     * Selos ESG — conferem apenas VISIBILIDADE nos resultados.
-     * Não há qualquer benefício financeiro associado.
-     */
-    CREATE TABLE IF NOT EXISTS selos_esg (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      nome TEXT NOT NULL UNIQUE,
-      descricao TEXT NOT NULL,
-      icone TEXT NOT NULL
-    );
-
-    /* Relação N:N entre anúncios e selos ESG */
-    CREATE TABLE IF NOT EXISTS anuncio_selos (
-      anuncio_id INTEGER NOT NULL,
-      selo_id INTEGER NOT NULL,
-      PRIMARY KEY (anuncio_id, selo_id),
-      FOREIGN KEY (anuncio_id) REFERENCES anuncios(id) ON DELETE CASCADE,
-      FOREIGN KEY (selo_id) REFERENCES selos_esg(id) ON DELETE CASCADE
     );
 
     /* Setores do campus IFSP Jacareí */

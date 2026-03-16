@@ -45,11 +45,9 @@ main                    ← branch principal (protegida)
 
 ## Como adicionar um novo selo ESG
 
-1. Insira o selo na tabela `selos_esg` via seed ou SQL:
-   ```sql
-   INSERT INTO selos_esg (nome, descricao, icone) VALUES ('Nome do Selo', 'Descrição', '🌍');
-   ```
-2. O frontend carrega os selos automaticamente da API — não precisa alterar o front.
+1. Adicione o novo valor no CHECK constraint da coluna `selo_esg` em `backend/database.js`
+2. Adicione o novo selo no array `SELOS_ESG` em `frontend/script.js`
+3. Pronto — o filtro e o formulário já vão mostrar o novo selo
 
 ## Regras gerais
 

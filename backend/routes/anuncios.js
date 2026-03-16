@@ -12,41 +12,31 @@ const express = require('express')
 const router = express.Router()
 const bd = require('../database')
 
+/** Selos ESG válidos */
+const SELOS_VALIDOS = ['Habitação Consciente', 'Eco-Friendly', 'Certificado de Competência ESG']
+
 /**
- * Busca anúncios aprovados com seus selos ESG.
- * Anúncios com selos aparecem primeiro (maior visibilidade).
+ * Busca anúncios aprovados. Anúncios com selo ESG aparecem primeiro.
  * @param {string|null} tipo - Filtro por tipo (MORADIA, TRANSPORTE, EMPREGO)
- * @param {string|null} selo - Filtro por nome do selo ESG
- * @returns {Array} Lista de anúncios com selos
+ * @param {string|null} selo - Filtro por selo ESG
+ * @returns {Array} Lista de anúncios
  */
 function buscarAnuncios(tipo, selo) {
-  let sql = `
-    SELECT
-      a.*,
-      GROUP_CONCAT(s.nome, ', ') AS selos,
-      GROUP_CONCAT(s.icone, ', ') AS selos_icones,
-      COUNT(s.id) AS total_selos
-    FROM anuncios a
-    LEFT JOIN anuncio_selos ase ON a.id = ase.anuncio_id
-    LEFT JOIN selos_esg s ON ase.selo_id = s.id
-    WHERE a.status = 'aprovado'
-  `
-  const parametros = []
+  let sql = 'SELECT * FROM anuncios WHERE status = ?'
+  const parametros = ['aprovado']
 
   if (tipo) {
-    sql += ' AND a.tipo = ?'
+    sql += ' AND tipo = ?'
     parametros.push(tipo)
   }
 
-  sql += ' GROUP BY a.id'
-
   if (selo) {
-    sql += ' HAVING selos LIKE ?'
-    parametros.push(`%${selo}%`)
+    sql += ' AND selo_esg = ?'
+    parametros.push(selo)
   }
 
-  // Anúncios com selos ESG aparecem primeiro (gamificação de visibilidade)
-  sql += ' ORDER BY total_selos DESC, a.criado_em DESC'
+  // Anúncios com selo ESG aparecem primeiro (maior visibilidade)
+  sql += ' ORDER BY (selo_esg IS NOT NULL) DESC, criado_em DESC'
 
   return bd.prepare(sql).all(...parametros)
 }
@@ -54,7 +44,7 @@ function buscarAnuncios(tipo, selo) {
 /**
  * GET /api/anuncios
  * Lista todos os anúncios aprovados.
- * Parâmetros de query opcionais: ?tipo=MORADIA&selo=Eco-Friendly
+ * Query opcionais: ?tipo=MORADIA&selo=Eco-Friendly
  */
 router.get('/anuncios', (req, res) => {
   try {
@@ -67,45 +57,35 @@ router.get('/anuncios', (req, res) => {
   }
 })
 
-/**
- * GET /api/moradia
- * Lista anúncios aprovados do tipo MORADIA.
- */
+/** GET /api/moradia */
 router.get('/moradia', (req, res) => {
   try {
     const anuncios = buscarAnuncios('MORADIA', req.query.selo || null)
     res.json({ sucesso: true, dados: anuncios })
   } catch (erro) {
-    console.error('Erro ao buscar moradia:', erro)
     res.status(500).json({ sucesso: false, erro: 'Erro interno ao buscar moradias.' })
   }
 })
 
-/**
- * GET /api/transporte
- * Lista anúncios aprovados do tipo TRANSPORTE.
- */
+/** GET /api/transporte */
 router.get('/transporte', (req, res) => {
   try {
     const anuncios = buscarAnuncios('TRANSPORTE', req.query.selo || null)
     res.json({ sucesso: true, dados: anuncios })
   } catch (erro) {
-    console.error('Erro ao buscar transporte:', erro)
     res.status(500).json({ sucesso: false, erro: 'Erro interno ao buscar transportes.' })
   }
 })
 
 /**
  * GET /api/empregos
- * Lista anúncios aprovados do tipo EMPREGO.
- * NOTA: Apenas informativo — sem candidatura interna, apenas redirecionamento.
+ * Apenas informativo — sem candidatura interna, apenas redirecionamento.
  */
 router.get('/empregos', (req, res) => {
   try {
     const anuncios = buscarAnuncios('EMPREGO', req.query.selo || null)
     res.json({ sucesso: true, dados: anuncios })
   } catch (erro) {
-    console.error('Erro ao buscar empregos:', erro)
     res.status(500).json({ sucesso: false, erro: 'Erro interno ao buscar empregos.' })
   }
 })
@@ -113,21 +93,12 @@ router.get('/empregos', (req, res) => {
 /**
  * POST /api/anuncios
  * Cria um novo anúncio com status "pendente".
- * O anúncio só aparece no site após aprovação manual.
- *
- * Corpo da requisição (JSON):
- * - titulo (obrigatório)
- * - descricao (obrigatório)
- * - contato_nome (obrigatório)
- * - tipo (obrigatório: MORADIA, TRANSPORTE ou EMPREGO)
- * - contato_email, contato_telefone, endereco, preco, periodo, imagem_url, link_externo (opcionais)
- * - selos_ids (opcional): array com IDs dos selos ESG solicitados
  */
 router.post('/anuncios', (req, res) => {
   try {
     const {
       titulo, descricao, contato_nome, contato_email, contato_telefone,
-      endereco, preco, periodo, tipo, imagem_url, link_externo, selos_ids
+      endereco, preco, periodo, tipo, imagem_url, link_externo, selo_esg
     } = req.body
 
     // Validação de campos obrigatórios
@@ -139,30 +110,24 @@ router.post('/anuncios', (req, res) => {
     if (tipo && !['MORADIA', 'TRANSPORTE', 'EMPREGO'].includes(tipo)) {
       erros.push('O tipo deve ser MORADIA, TRANSPORTE ou EMPREGO.')
     }
+    if (selo_esg && !SELOS_VALIDOS.includes(selo_esg)) {
+      erros.push('Selo ESG inválido.')
+    }
 
     if (erros.length > 0) {
       return res.status(400).json({ sucesso: false, erros })
     }
 
-    // Insere o anúncio com status pendente
     const resultado = bd.prepare(`
       INSERT INTO anuncios (titulo, descricao, contato_nome, contato_email, contato_telefone,
-        endereco, preco, periodo, tipo, imagem_url, link_externo, status)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pendente')
+        endereco, preco, periodo, tipo, imagem_url, link_externo, selo_esg, status)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pendente')
     `).run(
       titulo.trim(), descricao.trim(), contato_nome.trim(),
       contato_email || null, contato_telefone || null,
       endereco || null, preco || null, periodo || null,
-      tipo, imagem_url || null, link_externo || null
+      tipo, imagem_url || null, link_externo || null, selo_esg || null
     )
-
-    // Associa selos ESG se informados
-    if (selos_ids && Array.isArray(selos_ids) && selos_ids.length > 0) {
-      const inserirSelo = bd.prepare('INSERT OR IGNORE INTO anuncio_selos (anuncio_id, selo_id) VALUES (?, ?)')
-      for (const seloId of selos_ids) {
-        inserirSelo.run(resultado.lastInsertRowid, seloId)
-      }
-    }
 
     res.status(201).json({
       sucesso: true,

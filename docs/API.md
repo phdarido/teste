@@ -108,11 +108,9 @@ curl "http://localhost:3000/api/anuncios?tipo=TRANSPORTE&selo=Eco-Friendly"
       "tipo": "MORADIA",
       "imagem_url": null,
       "link_externo": null,
+      "selo_esg": "Habitação Consciente",
       "status": "aprovado",
-      "criado_em": "2026-03-16 14:00:00",
-      "selos": "Habitação Consciente",
-      "selos_icones": "🏡",
-      "total_selos": 1
+      "criado_em": "2026-03-16 14:00:00"
     }
   ]
 }
@@ -135,7 +133,7 @@ curl -X POST http://localhost:3000/api/anuncios \
     "tipo": "MORADIA",
     "preco": 750,
     "periodo": "/mês",
-    "selos_ids": [1]
+    "selo_esg": "Habitação Consciente"
   }'
 ```
 
@@ -147,7 +145,7 @@ curl -X POST http://localhost:3000/api/anuncios \
 
 **Campos opcionais:**
 - `contato_email`, `contato_telefone`, `endereco`, `preco`, `periodo`, `imagem_url`, `link_externo`
-- `selos_ids` (array de IDs dos selos ESG)
+- `selo_esg` (texto: "Habitação Consciente", "Eco-Friendly" ou "Certificado de Competência ESG")
 
 **Resposta de sucesso (201):**
 ```json
@@ -205,37 +203,12 @@ curl http://localhost:3000/api/beneficios
 
 ---
 
-## GET /api/selos
+## Selos ESG
 
-Lista os selos ESG disponíveis na plataforma.
+Os selos ESG são valores fixos armazenados diretamente no campo `selo_esg` de cada anúncio. Valores válidos:
 
-```bash
-curl http://localhost:3000/api/selos
-```
+- `Habitação Consciente` — imóveis sustentáveis
+- `Eco-Friendly` — transportes e empresas sustentáveis
+- `Certificado de Competência ESG` — boas práticas ESG
 
-**Resposta:**
-```json
-{
-  "sucesso": true,
-  "dados": [
-    {
-      "id": 1,
-      "nome": "Habitação Consciente",
-      "descricao": "Para imóveis com práticas sustentáveis...",
-      "icone": "🏡"
-    },
-    {
-      "id": 2,
-      "nome": "Eco-Friendly",
-      "descricao": "Para transportes e empresas sustentáveis...",
-      "icone": "🌿"
-    },
-    {
-      "id": 3,
-      "nome": "Certificado de Competência ESG",
-      "descricao": "Para empresas com boas práticas ESG...",
-      "icone": "🏆"
-    }
-  ]
-}
-```
+Os selos conferem apenas maior visibilidade (anúncios com selo aparecem primeiro nos resultados).

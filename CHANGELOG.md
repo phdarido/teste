@@ -6,11 +6,11 @@
 
 **Backend (novo)**
 - Servidor Node.js + Express com API REST completa
-- Banco de dados SQLite com tabelas: anuncios, selos_esg, anuncio_selos, campus_setores
-- Endpoints: GET /health, /api/moradia, /api/transporte, /api/empregos, /api/anuncios, /api/campus, /api/beneficios, /api/selos
+- Banco de dados SQLite com tabelas: anuncios, campus_setores
+- Endpoints: GET /health, /api/moradia, /api/transporte, /api/empregos, /api/anuncios, /api/campus, /api/beneficios
 - Endpoint POST /api/anuncios com validação de campos obrigatórios e mensagens em PT-BR
 - Sistema de moderação: anúncios novos ficam com status "pendente"
-- Gamificação ESG: selos que conferem maior visibilidade (ranking) nos resultados
+- Selos ESG simplificados: campo direto no anúncio (sem tabelas extras)
 - Seeds com dados de exemplo: 10 anúncios, 3 selos ESG, 8 setores do campus, 5 benefícios sociais
 
 **Frontend (evoluído)**

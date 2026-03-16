@@ -19,7 +19,7 @@ require('./database')
 const rotasAnuncios = require('./routes/anuncios')
 const rotasCampus = require('./routes/campus')
 const rotasBeneficios = require('./routes/beneficios')
-const rotasSelos = require('./routes/selos')
+
 
 const app = express()
 const PORTA = process.env.PORT || 3000
@@ -50,7 +50,7 @@ app.get('/health', (req, res) => {
 app.use('/api', rotasAnuncios)
 app.use('/api', rotasCampus)
 app.use('/api', rotasBeneficios)
-app.use('/api', rotasSelos)
+
 
 // Rota fallback — serve o frontend para qualquer outra rota
 app.get('*', (req, res) => {
