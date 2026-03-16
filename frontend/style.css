@@ -1,0 +1,679 @@
+/* ============================================
+   Fala Calourada — Estilos (mobile-first)
+   Portal informativo IFSP Jacareí
+   ============================================ */
+
+/* ======== Reset e Base ======== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  line-height: 1.6;
+}
+
+/* Corrige o atributo hidden sendo sobrescrito por display:flex/grid */
+[hidden] {
+  display: none !important;
+}
+
+/* ======== Cabeçalho ======== */
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #e94560;
+  letter-spacing: -0.5px;
+}
+
+/* ======== Menu Hambúrguer (mobile) ======== */
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle.aberto span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-toggle.aberto span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.aberto span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ======== Navegação ======== */
+.nav-principal {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  gap: 4px;
+  margin-top: 12px;
+  order: 3;
+}
+
+.nav-principal.aberta {
+  display: flex;
+}
+
+.nav-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.nav-btn.active {
+  background: #e94560;
+  color: #fff;
+}
+
+/* Botão Enviar Anúncio */
+.btn-enviar-anuncio {
+  padding: 9px 20px;
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);
+}
+
+.btn-enviar-anuncio:hover {
+  background: #d63a54;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.4);
+}
+
+/* ======== Filtros ======== */
+.filtros {
+  padding: 16px 20px;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.filtros-linha {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.filtro-preco,
+.filtro-selo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filtro-preco label,
+.filtro-selo label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
+}
+
+#sliderPreco {
+  flex: 1;
+  appearance: none;
+  height: 5px;
+  border-radius: 5px;
+  background: #e0e0e0;
+}
+
+#sliderPreco::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #e94560;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(233, 69, 96, 0.3);
+}
+
+#valorPreco {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #e94560;
+  min-width: 80px;
+  text-align: right;
+}
+
+#selectSelo {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  background: #fff;
+}
+
+/* ======== Conteúdo Principal ======== */
+main {
+  min-height: calc(100vh - 200px);
+}
+
+.secao-ativa,
+.secao {
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px 20px;
+}
+
+.secao h2 {
+  font-size: 1.5rem;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+  font-weight: 800;
+}
+
+.secao-descricao {
+  color: #666;
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+
+/* ======== Grid de Cards ======== */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* ======== Card Individual ======== */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.card-conteudo {
+  padding: 20px;
+}
+
+.card-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.card-cabecalho h3 {
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: #1a1a2e;
+  font-weight: 700;
+}
+
+.card-preco {
+  font-weight: 800;
+  color: #e94560;
+  white-space: nowrap;
+  font-size: 1rem;
+  background: #fef0f3;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.card-tipo {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #16213e;
+  background: #e8eaf6;
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.card-descricao {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-contato {
+  font-size: 0.85rem;
+  color: #777;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+.card-contato p {
+  margin-bottom: 2px;
+}
+
+/* Link externo em vagas de emprego */
+.card-link-externo {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 18px;
+  background: #16213e;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.card-link-externo:hover {
+  background: #1a1a2e;
+  transform: translateY(-1px);
+}
+
+/* ======== Badge ESG ======== */
+.badge-esg {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1b7a3d;
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin-right: 4px;
+  margin-bottom: 8px;
+}
+
+.card-selos {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+/* ======== Sem Resultados ======== */
+.sem-resultados {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #999;
+  padding: 80px 20px;
+  font-weight: 500;
+}
+
+/* ======== Benefícios Sociais ======== */
+.lista-beneficios {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.beneficio-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-left: 4px solid #e94560;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s;
+}
+
+.beneficio-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.beneficio-card h3 {
+  font-size: 1.05rem;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.beneficio-card p {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.beneficio-card ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.beneficio-card li {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.beneficio-contato {
+  font-size: 0.85rem;
+  color: #e94560;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+/* ======== Guia do Campus (Accordion) ======== */
+.lista-setores {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.setor-item {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.setor-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1a1a2e;
+  transition: background 0.2s;
+}
+
+.setor-cabecalho:hover {
+  background: #f8f9fa;
+}
+
+.setor-seta {
+  transition: transform 0.3s ease;
+  font-size: 0.75rem;
+  color: #aaa;
+}
+
+.setor-item.aberto .setor-seta {
+  transform: rotate(180deg);
+}
+
+.setor-detalhe {
+  display: none;
+  padding: 0 20px 16px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.setor-item.aberto .setor-detalhe {
+  display: block;
+}
+
+.setor-detalhe p {
+  margin-bottom: 4px;
+}
+
+.setor-detalhe .setor-info {
+  color: #777;
+  font-size: 0.85rem;
+}
+
+/* ======== Modal (Formulário) ======== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 16px;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.modal-fechar {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: #f0f0f0;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #666;
+  line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.modal-fechar:hover {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.modal h2 {
+  font-size: 1.4rem;
+  margin-bottom: 4px;
+  font-weight: 800;
+  color: #1a1a2e;
+}
+
+.modal-aviso {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 24px;
+}
+
+/* ======== Formulário ======== */
+.campo {
+  margin-bottom: 16px;
+}
+
+.campo label,
+.campo legend {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 2px solid #e8e8e8;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  background: #fafafa;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: #e94560;
+  background: #fff;
+}
+
+.campo-grupo {
+  display: flex;
+  gap: 12px;
+}
+
+.campo-grupo .campo {
+  flex: 1;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #e94560 0%, #d63a54 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+}
+
+.btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(233, 69, 96, 0.4);
+}
+
+.btn-submit:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.mensagem-sucesso {
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 1.1rem;
+  color: #1b7a3d;
+  font-weight: 700;
+}
+
+/* ======== Rodapé ======== */
+footer {
+  text-align: center;
+  padding: 32px 20px;
+  background: #1a1a2e;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+  margin-top: 60px;
+}
+
+footer p {
+  margin-bottom: 4px;
+}
+
+/* ============================================
+   RESPONSIVO — Telas maiores (tablet+)
+   ============================================ */
+@media (min-width: 640px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filtros-linha {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .nav-principal {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    gap: 4px;
+    margin-top: 0;
+    order: 0;
+  }
+
+  .nav-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    text-align: center;
+    border-radius: 8px;
+  }
+
+  header {
+    padding: 12px 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .secao-ativa,
+  .secao {
+    padding: 32px 24px;
+  }
+}

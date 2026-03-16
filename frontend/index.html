@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fala Calourada — Portal informativo para calouros e veteranos do IFSP Jacareí. Moradia, transporte, empregos, benefícios e guia do campus.">
+  <meta name="keywords" content="IFSP, Jacareí, calouros, moradia, transporte, estágio, emprego, campus, benefícios, PAP">
+
+  <!-- Open Graph (compartilhamento em redes sociais) -->
+  <meta property="og:title" content="Fala Calourada — IFSP Jacareí">
+  <meta property="og:description" content="Portal informativo com moradia, transporte, empregos, benefícios e guia do campus para estudantes do IFSP Jacareí.">
+  <meta property="og:type" content="website">
+
+  <title>Fala Calourada — IFSP Jacareí</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ======== CABEÇALHO ======== -->
+  <header>
+    <div class="logo" role="banner">Fala Calourada</div>
+
+    <!-- Botão hambúrguer (mobile) -->
+    <button class="menu-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav-principal" role="navigation" aria-label="Navegação principal">
+      <button class="nav-btn active" data-secao="moradia">Moradia</button>
+      <button class="nav-btn" data-secao="transporte">Transporte</button>
+      <button class="nav-btn" data-secao="empregos">Empregos</button>
+      <button class="nav-btn" data-secao="beneficios">Benefícios</button>
+      <button class="nav-btn" data-secao="campus">Campus</button>
+    </nav>
+
+    <button class="btn-enviar-anuncio" id="btnAbrirFormulario">+ Enviar Anúncio</button>
+  </header>
+
+  <!-- ======== CONTEÚDO PRINCIPAL ======== -->
+  <main>
+
+    <!-- Filtros (visível em moradia, transporte, empregos) -->
+    <div class="filtros" id="areaFiltros">
+      <div class="filtros-linha">
+        <div class="filtro-preco">
+          <label for="sliderPreco">Preço máximo:</label>
+          <input type="range" id="sliderPreco" min="0" max="3000" value="3000" aria-label="Filtro de preço máximo">
+          <span id="valorPreco">R$ 3.000</span>
+        </div>
+        <div class="filtro-selo">
+          <label for="selectSelo">Selo ESG:</label>
+          <select id="selectSelo" aria-label="Filtro por selo ESG">
+            <option value="">Todos</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção: Anúncios (moradia, transporte, empregos) -->
+    <section id="secaoAnuncios" class="secao-ativa" aria-label="Anúncios">
+      <div class="cards" id="containerCards"></div>
+      <p class="sem-resultados" id="semResultados" hidden>
+        Nenhum anúncio encontrado para os filtros selecionados.
+      </p>
+    </section>
+
+    <!-- Seção: Benefícios Sociais -->
+    <section id="secaoBeneficios" class="secao" aria-label="Benefícios Sociais" hidden>
+      <h2>Benefícios Sociais — IFSP Jacareí</h2>
+      <p class="secao-descricao">
+        Informações sobre auxílios e programas de assistência estudantil.
+        Fique atento aos editais publicados no site oficial do IFSP.
+      </p>
+      <div id="listaBeneficios" class="lista-beneficios"></div>
+    </section>
+
+    <!-- Seção: Guia do Campus -->
+    <section id="secaoCampus" class="secao" aria-label="Guia do Campus" hidden>
+      <h2>Guia do Campus — IFSP Jacareí</h2>
+      <p class="secao-descricao">
+        Setores, contatos e localização dentro do campus.
+      </p>
+      <div id="listaSetores" class="lista-setores"></div>
+    </section>
+
+    <!-- Modal: Formulário de Envio de Anúncio -->
+    <div class="modal-overlay" id="modalFormulario" hidden>
+      <div class="modal" role="dialog" aria-label="Enviar novo anúncio">
+        <button class="modal-fechar" id="btnFecharModal" aria-label="Fechar formulário">&times;</button>
+        <h2>Enviar Novo Anúncio</h2>
+        <p class="modal-aviso">
+          Seu anúncio ficará pendente até ser aprovado pela moderação.
+        </p>
+
+        <form id="formularioAnuncio">
+          <div class="campo">
+            <label for="campoTipo">Tipo *</label>
+            <select id="campoTipo" name="tipo" required>
+              <option value="">Selecione...</option>
+              <option value="MORADIA">Moradia</option>
+              <option value="TRANSPORTE">Transporte</option>
+              <option value="EMPREGO">Emprego</option>
+            </select>
+          </div>
+
+          <div class="campo">
+            <label for="campoTitulo">Título *</label>
+            <input type="text" id="campoTitulo" name="titulo" required maxlength="120" placeholder="Ex: Quarto para alugar perto do IFSP">
+          </div>
+
+          <div class="campo">
+            <label for="campoDescricao">Descrição *</label>
+            <textarea id="campoDescricao" name="descricao" required rows="4" maxlength="500" placeholder="Descreva o que está oferecendo..."></textarea>
+          </div>
+
+          <div class="campo">
+            <label for="campoNome">Seu nome *</label>
+            <input type="text" id="campoNome" name="contato_nome" required maxlength="80">
+          </div>
+
+          <div class="campo-grupo">
+            <div class="campo">
+              <label for="campoEmail">E-mail</label>
+              <input type="email" id="campoEmail" name="contato_email" maxlength="120">
+            </div>
+            <div class="campo">
+              <label for="campoTelefone">Telefone</label>
+              <input type="tel" id="campoTelefone" name="contato_telefone" maxlength="20" placeholder="(12) 99999-9999">
+            </div>
+          </div>
+
+          <div class="campo-grupo">
+            <div class="campo">
+              <label for="campoPreco">Preço (R$)</label>
+              <input type="number" id="campoPreco" name="preco" min="0" step="0.01">
+            </div>
+            <div class="campo">
+              <label for="campoPeriodo">Período</label>
+              <select id="campoPeriodo" name="periodo">
+                <option value="">(opcional)</option>
+                <option value="/mês">/mês</option>
+                <option value="/dia">/dia</option>
+                <option value="/viagem">/viagem</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="campoEndereco">Endereço</label>
+            <input type="text" id="campoEndereco" name="endereco" maxlength="200">
+          </div>
+
+          <div class="campo" id="campoLinkExternoWrapper">
+            <label for="campoLinkExterno">Link externo (para vagas de emprego)</label>
+            <input type="url" id="campoLinkExterno" name="link_externo" placeholder="https://...">
+          </div>
+
+          <div class="campo">
+            <label for="campoSeloEsg">Selo ESG (opcional — apenas visibilidade)</label>
+            <select id="campoSeloEsg" name="selo_esg">
+              <option value="">Nenhum</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-submit">Enviar Anúncio</button>
+        </form>
+
+        <div id="mensagemSucesso" class="mensagem-sucesso" hidden>
+          Anúncio enviado com sucesso! Ele ficará pendente até ser aprovado pela moderação.
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ======== RODAPÉ ======== -->
+  <footer>
+    <p>Fala Calourada — Portal informativo do IFSP Jacareí</p>
+    <p>Projeto acadêmico sem fins lucrativos. Não realizamos intermediação.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
