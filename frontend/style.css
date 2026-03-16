@@ -11,10 +11,15 @@
 }
 
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #f5f5f5;
-  color: #333;
-  line-height: 1.5;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  line-height: 1.6;
+}
+
+/* Corrige o atributo hidden sendo sobrescrito por display:flex/grid */
+[hidden] {
+  display: none !important;
 }
 
 /* ======== Cabeçalho ======== */
@@ -23,25 +28,26 @@ header {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  background: white;
-  border-bottom: 2px solid #ff385c;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
 .logo {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #ff385c;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #e94560;
+  letter-spacing: -0.5px;
 }
 
 /* ======== Menu Hambúrguer (mobile) ======== */
 .menu-toggle {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   background: none;
   border: none;
   cursor: pointer;
@@ -50,14 +56,13 @@ header {
 
 .menu-toggle span {
   display: block;
-  width: 24px;
-  height: 3px;
-  background: #333;
+  width: 22px;
+  height: 2px;
+  background: #fff;
   border-radius: 2px;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-/* Estado aberto do hambúrguer */
 .menu-toggle.aberto span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
@@ -83,51 +88,53 @@ header {
 }
 
 .nav-btn {
-  padding: 10px 16px;
-  border: 1px solid #ddd;
+  padding: 10px 18px;
+  border: none;
   border-radius: 8px;
-  background: white;
+  background: rgba(255, 255, 255, 0.08);
   cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #555;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
   transition: all 0.2s ease;
   text-align: left;
 }
 
 .nav-btn:hover {
-  background: #fff0f3;
-  color: #ff385c;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
 }
 
 .nav-btn.active {
-  background: #ff385c;
-  color: white;
-  border-color: #ff385c;
+  background: #e94560;
+  color: #fff;
 }
 
 /* Botão Enviar Anúncio */
 .btn-enviar-anuncio {
-  padding: 8px 16px;
-  background: #ff385c;
-  color: white;
+  padding: 9px 20px;
+  background: #e94560;
+  color: #fff;
   border: none;
-  border-radius: 20px;
-  font-weight: bold;
+  border-radius: 8px;
+  font-weight: 700;
   cursor: pointer;
   font-size: 0.85rem;
-  transition: background 0.2s;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);
 }
 
 .btn-enviar-anuncio:hover {
-  background: #e0304f;
+  background: #d63a54;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.4);
 }
 
 /* ======== Filtros ======== */
 .filtros {
-  padding: 16px;
-  background: white;
-  border-bottom: 1px solid #eee;
+  padding: 16px 20px;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
 }
 
 .filtros-linha {
@@ -156,32 +163,35 @@ header {
 #sliderPreco {
   flex: 1;
   appearance: none;
-  height: 6px;
+  height: 5px;
   border-radius: 5px;
-  background: linear-gradient(to right, #4CAF50, #4CAF50) 0/100% 100% no-repeat, #ddd;
+  background: #e0e0e0;
 }
 
 #sliderPreco::-webkit-slider-thumb {
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: #4CAF50;
+  background: #e94560;
   cursor: pointer;
+  box-shadow: 0 2px 6px rgba(233, 69, 96, 0.3);
 }
 
 #valorPreco {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 0.9rem;
+  color: #e94560;
   min-width: 80px;
   text-align: right;
 }
 
 #selectSelo {
-  padding: 6px 10px;
+  padding: 8px 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  background: #fff;
 }
 
 /* ======== Conteúdo Principal ======== */
@@ -193,18 +203,19 @@ main {
 .secao {
   max-width: 1200px;
   margin: auto;
-  padding: 20px 16px;
+  padding: 24px 20px;
 }
 
 .secao h2 {
-  font-size: 1.4rem;
-  color: #333;
-  margin-bottom: 8px;
+  font-size: 1.5rem;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+  font-weight: 800;
 }
 
 .secao-descricao {
   color: #666;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   font-size: 0.95rem;
 }
 
@@ -217,52 +228,59 @@ main {
 
 /* ======== Card Individual ======== */
 .card {
-  background: white;
-  border-radius: 12px;
+  background: #fff;
+  border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  border: 1px solid #eee;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
 }
 
 .card-conteudo {
-  padding: 16px;
+  padding: 20px;
 }
 
 .card-cabecalho {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .card-cabecalho h3 {
-  font-size: 1rem;
-  line-height: 1.3;
-  color: #333;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: #1a1a2e;
+  font-weight: 700;
 }
 
 .card-preco {
-  font-weight: bold;
-  color: #ff385c;
+  font-weight: 800;
+  color: #e94560;
   white-space: nowrap;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  background: #fef0f3;
+  padding: 4px 10px;
+  border-radius: 8px;
 }
 
 .card-tipo {
   display: inline-block;
-  font-size: 0.75rem;
-  font-weight: bold;
-  color: #ff385c;
-  background: #fff0f3;
-  padding: 2px 8px;
-  border-radius: 12px;
-  margin-bottom: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #16213e;
+  background: #e8eaf6;
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
 }
 
 .card-descricao {
@@ -279,8 +297,8 @@ main {
   font-size: 0.85rem;
   color: #777;
   border-top: 1px solid #f0f0f0;
-  padding-top: 8px;
-  margin-top: 8px;
+  padding-top: 12px;
+  margin-top: 12px;
 }
 
 .card-contato p {
@@ -290,19 +308,20 @@ main {
 /* Link externo em vagas de emprego */
 .card-link-externo {
   display: inline-block;
-  margin-top: 8px;
-  padding: 6px 14px;
-  background: #ff385c;
-  color: white;
+  margin-top: 10px;
+  padding: 8px 18px;
+  background: #16213e;
+  color: #fff;
   text-decoration: none;
-  border-radius: 16px;
+  border-radius: 8px;
   font-size: 0.8rem;
-  font-weight: bold;
-  transition: background 0.2s;
+  font-weight: 700;
+  transition: all 0.2s;
 }
 
 .card-link-externo:hover {
-  background: #e0304f;
+  background: #1a1a2e;
+  transform: translateY(-1px);
 }
 
 /* ======== Badge ESG ======== */
@@ -311,27 +330,27 @@ main {
   align-items: center;
   gap: 4px;
   font-size: 0.75rem;
-  font-weight: bold;
-  color: #2e7d32;
-  background: #e8f5e9;
-  padding: 3px 8px;
-  border-radius: 12px;
+  font-weight: 700;
+  color: #1b7a3d;
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  padding: 4px 10px;
+  border-radius: 8px;
   margin-right: 4px;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .card-selos {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 /* ======== Sem Resultados ======== */
 .sem-resultados {
   text-align: center;
   font-size: 1.1rem;
-  color: #888;
-  padding: 60px 20px;
+  color: #999;
+  padding: 80px 20px;
   font-weight: 500;
 }
 
@@ -339,21 +358,28 @@ main {
 .lista-beneficios {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .beneficio-card {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid #eee;
-  border-left: 4px solid #ff385c;
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-left: 4px solid #e94560;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s;
+}
+
+.beneficio-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 .beneficio-card h3 {
   font-size: 1.05rem;
-  color: #333;
+  color: #1a1a2e;
   margin-bottom: 8px;
+  font-weight: 700;
 }
 
 .beneficio-card p {
@@ -375,45 +401,46 @@ main {
 
 .beneficio-contato {
   font-size: 0.85rem;
-  color: #ff385c;
-  font-weight: 600;
-  margin-top: 8px;
+  color: #e94560;
+  font-weight: 700;
+  margin-top: 12px;
 }
 
 /* ======== Guia do Campus (Accordion) ======== */
 .lista-setores {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .setor-item {
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #eee;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .setor-cabecalho {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 16px;
+  padding: 16px 20px;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
-  color: #333;
+  color: #1a1a2e;
   transition: background 0.2s;
 }
 
 .setor-cabecalho:hover {
-  background: #f9f9f9;
+  background: #f8f9fa;
 }
 
 .setor-seta {
   transition: transform 0.3s ease;
-  font-size: 0.8rem;
-  color: #999;
+  font-size: 0.75rem;
+  color: #aaa;
 }
 
 .setor-item.aberto .setor-seta {
@@ -422,7 +449,7 @@ main {
 
 .setor-detalhe {
   display: none;
-  padding: 0 16px 14px;
+  padding: 0 20px 16px;
   font-size: 0.9rem;
   color: #555;
 }
@@ -447,7 +474,8 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -456,74 +484,89 @@ main {
 }
 
 .modal {
-  background: white;
-  border-radius: 16px;
-  padding: 24px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
   width: 100%;
-  max-width: 560px;
+  max-width: 520px;
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
 }
 
 .modal-fechar {
   position: absolute;
-  top: 12px;
-  right: 16px;
-  background: none;
+  top: 16px;
+  right: 20px;
+  background: #f0f0f0;
   border: none;
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   cursor: pointer;
-  color: #999;
+  color: #666;
   line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
 }
 
 .modal-fechar:hover {
+  background: #e0e0e0;
   color: #333;
 }
 
 .modal h2 {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   margin-bottom: 4px;
+  font-weight: 800;
+  color: #1a1a2e;
 }
 
 .modal-aviso {
   font-size: 0.85rem;
   color: #888;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 /* ======== Formulário ======== */
 .campo {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .campo label,
 .campo legend {
   display: block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .campo input,
 .campo select,
 .campo textarea {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  padding: 11px 14px;
+  border: 2px solid #e8e8e8;
+  border-radius: 10px;
   font-size: 0.9rem;
   font-family: inherit;
   transition: border-color 0.2s;
+  background: #fafafa;
 }
 
 .campo input:focus,
 .campo select:focus,
 .campo textarea:focus {
   outline: none;
-  border-color: #ff385c;
+  border-color: #e94560;
+  background: #fff;
 }
 
 .campo-grupo {
@@ -535,51 +578,49 @@ main {
   flex: 1;
 }
 
-.campo fieldset {
-  border: none;
-  padding: 0;
-}
-
-
 .btn-submit {
   width: 100%;
-  padding: 12px;
-  background: #ff385c;
-  color: white;
+  padding: 14px;
+  background: linear-gradient(135deg, #e94560 0%, #d63a54 100%);
+  color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 800;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s;
   margin-top: 8px;
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
 }
 
 .btn-submit:hover {
-  background: #e0304f;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(233, 69, 96, 0.4);
 }
 
 .btn-submit:disabled {
   background: #ccc;
   cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 .mensagem-sucesso {
   text-align: center;
-  padding: 32px 16px;
+  padding: 40px 20px;
   font-size: 1.1rem;
-  color: #2e7d32;
-  font-weight: 600;
+  color: #1b7a3d;
+  font-weight: 700;
 }
 
 /* ======== Rodapé ======== */
 footer {
   text-align: center;
-  padding: 24px 16px;
-  background: #333;
-  color: #aaa;
+  padding: 32px 20px;
+  background: #1a1a2e;
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.85rem;
-  margin-top: 40px;
+  margin-top: 60px;
 }
 
 footer p {
@@ -601,7 +642,6 @@ footer p {
 }
 
 @media (min-width: 768px) {
-  /* Esconde hambúrguer */
   .menu-toggle {
     display: none;
   }
@@ -610,19 +650,20 @@ footer p {
     display: flex;
     flex-direction: row;
     width: auto;
-    gap: 6px;
+    gap: 4px;
     margin-top: 0;
     order: 0;
   }
 
   .nav-btn {
-    padding: 8px 14px;
+    padding: 8px 16px;
     font-size: 0.85rem;
     text-align: center;
+    border-radius: 8px;
   }
 
   header {
-    padding: 12px 24px;
+    padding: 12px 28px;
   }
 }
 
@@ -633,6 +674,6 @@ footer p {
 
   .secao-ativa,
   .secao {
-    padding: 24px;
+    padding: 32px 24px;
   }
 }
