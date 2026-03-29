@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Fala Calourada</div>
+</header>
+
+<main class="secao-ativa">
+
+  <div class="modal" style="margin:auto; margin-top:60px; max-width:400px;">
+
+    <h2>Criar conta</h2>
+
+    <form id="formCadastro">
+
+      <div class="campo">
+        <label>Nome</label>
+        <input type="text" name="nome" required>
+      </div>
+
+      <div class="campo">
+        <label>Email</label>
+        <input type="email" name="email" required>
+      </div>
+
+      <div class="campo">
+        <label>Senha</label>
+        <input type="password" name="senha" required>
+      </div>
+
+      <div class="campo">
+        <label>Tipo de usuário</label>
+        <select name="tipo_usuario" id="tipoUsuario" required>
+        <option value="">Selecione</option>
+            <option value="ALUNO">Aluno / Ex-aluno</option>
+            <option value="OUTRO">Pessoa comum</option>
+            <option value="IMOBILIARIA">Imobiliária</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label id="labelDocumento">Documento</label>
+        <input type="text" name="documento" id="campoDocumento" required>
+      </div>
+
+      <button type="submit" class="btn-submit">Cadastrar</button>
+
+    </form>
+
+    <div id="erroCadastro" hidden style="color:red; margin-top:10px;"></div>
+
+  </div>
+
+</main>
+
+<script src="cadastro.js"></script>
+
+</body>
+</html>
